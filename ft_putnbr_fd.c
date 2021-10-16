@@ -6,7 +6,7 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 17:42:17 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/13 18:37:44 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/16 17:19:17 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,25 @@ int	step_me(int i)
 	e = i;
 	stp = 1;
 	while (--e > 0)
-		stp*=10;
+		stp *= 10;
 	return (stp);
+}
+
+int	check_n(int n, int fd)
+{
+	if (n == 0)
+		write(fd, "0", 1);
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		n = 0;
+	}
+	if (n < 0)
+	{
+		n *= -1;
+		write(fd, "-", 1);
+	}
+	return (n);
 }
 
 void	ft_putnbr_fd(int n, int fd)
@@ -30,15 +47,9 @@ void	ft_putnbr_fd(int n, int fd)
 	int		i;
 	int		num;
 
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	if (n < 0)
-	{
-		n *= -1;
-		write(fd, "-", 1);
-	}
+	n = check_n(n, fd);
 	if (n == 0)
-		write(fd, "0", 1);
+		return ;
 	num = n;
 	i = 0;
 	while (num != 0)
