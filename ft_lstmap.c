@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/06 21:42:29 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/19 19:48:43 by eraynald         ###   ########.fr       */
+/*   Created: 2021/10/20 17:21:25 by eraynald          #+#    #+#             */
+/*   Updated: 2021/10/20 18:22:37 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char		*d;
-	const char	*s;
-	size_t		n;
-	size_t		dlen;
+	t_list	*e;
+	t_list	*new_t_list;
 
-	d = dst;
-	s = src;
-	n = dstsize;
-	while (n-- != 0 && *d != '\0')
-		d++;
-	dlen = d - dst;
-	n = dstsize - dlen;
-	if (n == 0)
-		return (dlen + ft_strlen(s));
-	while (*s != '\0')
+	new_t_list = NULL;
+	if (lst && f)
 	{
-		if (n != 1)
+		while (lst)
 		{
-			*d++ = *s;
-			n--;
+			e = ft_lstnew((*f)(lst->content));
+			if (!e)
+			{
+				while (new_t_list)
+				{
+					e = new_t_list->next;
+					(*del)(new_t_list->content);
+					free(new_t_list);
+					new_t_list = e;
+				}
+			}
+			ft_lstadd_back(&new_t_list, e);
+			lst = lst->next;
 		}
-		s++;
 	}
-	*d = '\0';
-	return (dlen + (s - src));
+	return (new_t_list);
 }

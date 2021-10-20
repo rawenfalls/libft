@@ -6,13 +6,13 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 17:42:17 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/16 17:19:17 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:40:10 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	step_me(int i)
+static int	step_me(int i)
 {
 	int	e;
 	int	stp;
@@ -24,7 +24,7 @@ int	step_me(int i)
 	return (stp);
 }
 
-int	check_n(int n, int fd)
+static int	check_n(int n, int fd)
 {
 	if (n == 0)
 		write(fd, "0", 1);

@@ -6,13 +6,13 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:30:15 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/07 15:52:27 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:41:23 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	len_needle(const char *needle)
+static int	len_needle(const char *needle)
 {
 	int		siz;
 

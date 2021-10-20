@@ -6,7 +6,7 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 12:34:34 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/16 14:22:51 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:39:38 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-
-// main ()
-// {
-// 	char s[]="012345";
-// 	printf("%s", ft_memchr(s, '2', 4));
-// 	return (0);	
-// }

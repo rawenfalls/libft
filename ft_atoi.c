@@ -6,13 +6,13 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:02:30 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/16 14:44:21 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:38:46 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	num_construct(int i, int is_negativ, const char *str)
+static int	num_construct(int i, int is_negativ, const char *str)
 {
 	unsigned int	num_f;
 
@@ -58,9 +58,3 @@ int	ft_atoi(const char *str)
 	}
 	return (num_construct(i, is_negativ, str));
 }
-// int	main()
-// {
-// 	printf("|%d| = |%d|", ft_atoi("1"), atoi("1"));
-// 	printf("|%d| = |%d|", ft_atoi("1385506061"), atoi("1385506061"));
-// 	return (0);
-// }

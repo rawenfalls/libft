@@ -6,13 +6,13 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 17:17:57 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/17 16:03:23 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:39:29 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	schet_len(int n)
+static int	schet_len(int n)
 {
 	int	len;
 

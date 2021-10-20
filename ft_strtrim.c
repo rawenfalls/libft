@@ -6,13 +6,13 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 13:37:57 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/16 15:53:39 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/19 21:25:06 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	compare_set(const char s, char const *set)
+static int	compare_set(const char s, char const *set)
 {
 	size_t	i;
 
@@ -26,7 +26,8 @@ int	compare_set(const char s, char const *set)
 	return (1);
 }
 
-char	*in_char_str(char *p, size_t size_sn, size_t size_sk, char const *s1)
+static char	*in_char_str(char *p, size_t size_sn,
+		size_t size_sk, char const *s1)
 {
 	size_t	i;
 
@@ -40,7 +41,7 @@ char	*in_char_str(char *p, size_t size_sn, size_t size_sk, char const *s1)
 	return (p);
 }
 
-int	size_sk_schet(char const *s1)
+static int	size_sk_schet(char const *s1)
 {
 	size_t	i;
 
@@ -50,7 +51,7 @@ int	size_sk_schet(char const *s1)
 	return (i);
 }
 
-int	size_sn_schet(char const *s1, char const *set)
+static int	size_sn_schet(char const *s1, char const *set)
 {
 	size_t	i;
 
@@ -75,7 +76,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (s1[0] == '\0' )
 	{
 		p = malloc(sizeof(char));
-		p = "\0";
+		p[0] = '\0';
 		return (p);
 	}
 	size_sn = size_sn_schet(s1, set);

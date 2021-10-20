@@ -6,17 +6,20 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 12:56:29 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/16 16:59:25 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/20 00:28:55 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*checker_malloc(char	*p, int i)
+static char	*create_newstring(size_t i)
 {
-	p = malloc(sizeof(char) * i);
-	if (p == NULL)
+	char	*p;
+
+	p = malloc(sizeof(char) * i + 1);
+	if (!p)
 		return (NULL);
+	p[i] = '\0';
 	return (p);
 }
 
@@ -28,21 +31,19 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	p = NULL;
-	if (len == 0)
-		return (checker_malloc(p, 1));
-	p = malloc(sizeof(char) * (len + 1));
-	if (p == NULL)
+	size = ft_strlen(s);
+	if (size <= start)
+		return (create_newstring(0));
+	if ((len + start) > size)
+		len = size - start;
+	p = create_newstring(len);
+	if (!p)
 		return (NULL);
-	size = 0;
-	while (s[size])
-		size++;
 	i = 0;
-	while (i < len && i + (size_t)start < size)
+	while (i < len)
 	{
 		p[i] = s[i + (size_t)start];
 		i++;
 	}
-	p[i] = '\0';
 	return (p);
 }

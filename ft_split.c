@@ -6,111 +6,64 @@
 /*   By: eraynald <eraynald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 13:35:54 by eraynald          #+#    #+#             */
-/*   Updated: 2021/10/16 15:20:28 by eraynald         ###   ########.fr       */
+/*   Updated: 2021/10/20 14:16:14 by eraynald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*print_in_string(char const *s, int i, char *p, char c)
-{
-	int	count;
-	int	e;
-
-	e = i;
-	count = -1;
-	while (s[++e])
-	{
-		if (s[e] == c)
-			break ;
-	}
-	while (i + (++count) < e)
-		p[count] = s[i + count];
-	p[count] = '\0';
-	i = e;
-	return (p);
-}
-
-int	count_c(char const *s, char c)
-{
-	int	i;
-	int	is_c;
-	int	word;
-
-	i = -1;
-	word = 0;
-	is_c = 0;
-	while (s[++i])
-	{
-		if (s[i] != c && is_c == 0)
-		{
-			is_c = 1;
-			word++;
-		}
-		else
-			is_c = 0;
-	}
-	return (word + 1);
-}
-
-int	detect(int i, char const *s, char c)
-{
-	int	e;
-
-	e = i;
-	while (s[++e])
-	{
-		if (s[e] == c)
-			return (e);
-	}
-	return (e);
-}
-
-int	prodlenie_str(char const *s, char c, char	**p, int str)
+static size_t	how_much_len(char const *s, char c)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (*s)
 	{
-		if (s[i] != c)
+		if (*s == c)
+			s++;
+		else
 		{
-			p[str] = malloc(sizeof(char) * (detect(i, s, c) - i + 1));
-			if (p[str] == NULL)
-				return (-1);
-			p[str] = print_in_string(s, i, p[str], c);
-			i = detect(i, s, c) - 1;
-			str++;
+			i++;
+			while (*s && *s != c)
+				s++;
 		}
-		i++;
 	}
-	return (str);
+	return (i);
+}
+
+static char	**cycle_len(char const *s, char c, char	**p)
+{
+	size_t	i;
+	size_t	str_count;
+	char	*str;
+
+	i = 0;
+	while (*s)
+	{
+		while (*s && *s == c)
+			s++;
+		str = (char *)s;
+		str_count = 0;
+		while ((*s != c) && *s)
+		{
+			str_count++;
+			s++;
+		}
+		if (*(s - 1) != c)
+			p[i++] = ft_substr(str, 0, str_count);
+	}
+	p[i] = NULL;
+	return (p);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**p;
-	int		str;
 
 	if (!s)
 		return (NULL);
-	str = 0;
-	if (s[0] == '\0')
-	{
-		p = malloc(sizeof(char *));
-		p[0] = malloc(sizeof(char));
-		p[0] = NULL;
-		return (p);
-	}
-	p = malloc(sizeof(char *) * count_c(s, c));
-	if (p == NULL)
+	p = (char **)malloc(sizeof(char *) * (how_much_len(s, c) + 1));
+	if (!p)
 		return (NULL);
-	str = prodlenie_str(s, c, p, str);
-	if (str == -1)
-		return (NULL);
-	p[str] = malloc(sizeof(char));
-	if (p[str] == NULL)
-		return (NULL);
-	p[str] = NULL;
-	return (p);
+	return (cycle_len(s, c, p));
 }
